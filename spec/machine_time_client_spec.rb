@@ -34,7 +34,7 @@ describe MachineTimeClient do
 				allow(MachineTimeClient).to receive(:config).and_return(config)				
 			end
 			it {
-				expect{ subject }.to raise_error(RuntimeError, /Orochi/)
+				expect{ subject }.to raise_error(RuntimeError, /Godigo/)
 			}
 		end
 
@@ -60,7 +60,7 @@ describe MachineTimeClient do
 				allow(MachineTimeClient).to receive(:config).and_return(config)				
 			end
 			it {
-				expect{ subject }.to raise_error(RuntimeError, /Orochi/)
+				expect{ subject }.to raise_error(RuntimeError, /Godigo/)
 			}
 		end
 
