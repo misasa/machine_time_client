@@ -13,7 +13,7 @@ end
 
 module MachineTimeClient
 	@default_machine = 'MACHINE-1'
-	@default_uri = 'http://database.misasa.okayama-u.ac.jp/machine/'
+	@default_uri = 'https://database.misasa.okayama-u.ac.jp/machine/'
 	DEFAULT_CONFIG = {:uri_machine => @default_uri, :machine => @default_machine }
 
   	@pref_path = nil
