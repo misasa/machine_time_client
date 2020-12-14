@@ -17,6 +17,10 @@ See
 [gem package -- godigo](https://github.com/misasa/godigo "follow instruction")
 that refers to this package.
 
+# Dependency
+
+Ruby 2.5, 2.6, or 2.7.
+
 # Installation
 
 Add this line to your application's Gemfile:
