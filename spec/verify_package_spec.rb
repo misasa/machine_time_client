@@ -76,7 +76,14 @@ RSpec.describe 'installed package verification' do
     GEMFILE
     archive = build
     bundle = Gem.bin_path('bundler', 'bundle')
-    environment = {'BUNDLE_GEMFILE' => gemfile, 'BUNDLE_IGNORE_CONFIG' => '1'}
+    # ruby/setup-ruby installs into a bundle path that disappears from Gem.path
+    # when leaving Bundler. Keep those resolved gems visible to the fixture.
+    dependency_paths = (Gem.path + Bundler.load.specs.map(&:base_dir)).uniq
+    environment = {
+      'BUNDLE_GEMFILE' => gemfile, 'BUNDLE_IGNORE_CONFIG' => '1',
+      'GEM_HOME' => File.join(@directory, 'gems'),
+      'GEM_PATH' => dependency_paths.join(File::PATH_SEPARATOR)
+    }
     Bundler.with_unbundled_env do
       _, stderr, status = Open3.capture3(environment, RbConfig.ruby, bundle, 'install', '--local')
       expect(status.success?).to be(true), stderr
