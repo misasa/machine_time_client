@@ -8,28 +8,23 @@ Gem::Specification.new do |spec|
   spec.version       = MachineTimeClient::VERSION
   spec.authors       = ["Yusuke Yachi"]
   spec.email         = ["yusuke.yachi@gmail.com"]
-  spec.summary       = %q{Client application for MachineTime.}
-  spec.description   = %q{This is a client application for MachineTime.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.summary       = %q{Ruby client for the MachineTime REST API.}
+  spec.description   = %q{Access MachineTime machines and sessions through ActiveResource.}
+  spec.homepage      = "https://github.com/misasa/machine_time_client"
+  spec.license       = "GPL-3.0-or-later"
+  spec.required_ruby_version = ">= 2.6.0"
 
-  spec.files         = `git ls-files -z`.split("\x0")
+  spec.files         = Dir["lib/**/*.rb"] + %w[README.md LICENSE.txt]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency('sinatra', "~> 1.4")
-  spec.add_dependency('sinatra-contrib', "~> 1.4")
-  spec.add_dependency('haml', "~> 4.0")
   spec.add_runtime_dependency 'activeresource', '>= 5.1.1'
-  spec.add_dependency('tepra', "~> 1.0")
+  # ActiveSupport 6.1 relies on concurrent-ruby loading Logger on Ruby 2.6.
+  spec.add_runtime_dependency 'concurrent-ruby', '~> 1.3', '< 1.3.5'
+  spec.add_runtime_dependency 'logger'
+  spec.add_runtime_dependency 'ostruct'
 
-  spec.add_development_dependency "bundler", "~> 2.1"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", "3.3"
-  spec.add_development_dependency "turnip", "~> 1.2"
-  spec.add_development_dependency "rack-test", "~> 0.0"
-  spec.add_development_dependency "factory_girl", "~> 4.4"
-  spec.add_development_dependency "fakeweb", "~> 1.3"
-  spec.add_development_dependency "fakeweb-matcher", "~> 1.2"  
+  spec.add_development_dependency "bundler", ">= 2.4"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rspec", "~> 3.13"
 end
