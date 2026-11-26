@@ -1,3 +1,17 @@
+require 'tmpdir'
+require 'fileutils'
+
+# Load the library with an isolated configuration before its resource classes
+# read the site. Never read or write the developer's ~/.godigorc.
+spec_config_dir = Dir.mktmpdir('machine-time-spec-config-')
+spec_original_home = ENV['HOME']
+ENV['HOME'] = spec_config_dir
+File.write(File.join(spec_config_dir, '.godigorc'), "---\nuri_machine: https://machine.invalid/machine/\nmachine: TEST\n")
+at_exit do
+  ENV['HOME'] = spec_original_home
+  FileUtils.remove_entry(spec_config_dir)
+end
+
 require 'machine_time_client'
 
 #MachineTimeClient.config = {:uri_machine => "http://database.misasa.okayama-u.ac.jp/machine/", :machine => "JXA-8800"}
